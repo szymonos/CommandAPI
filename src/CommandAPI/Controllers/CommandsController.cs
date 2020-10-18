@@ -1,3 +1,6 @@
+/*
+http://localhost:5000/api/commands
+*/
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 

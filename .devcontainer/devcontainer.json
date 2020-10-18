@@ -20,18 +20,19 @@
     },
     // Add the IDs of extensions you want installed when the container is created.
     "extensions": [
-        "ms-dotnettools.csharp",
-        "ms-vscode.powershell",
-        "hbenl.vscode-test-explorer",
-        "eamodio.gitlens",
-        "tyriar.shell-launcher",
-        "aaron-bond.better-comments",
-        "coenraads.bracket-pair-colorizer-2",
-        "shardulm94.trailing-spaces",
-        "fudge.auto-using",
-        "heaths.vscode-guid",
-        "patcx.vscode-nuget-gallery"
-    ],
+		"ms-dotnettools.csharp",
+		"ms-vscode.powershell",
+		"hbenl.vscode-test-explorer",
+		"eamodio.gitlens",
+		"tyriar.shell-launcher",
+		"aaron-bond.better-comments",
+		"coenraads.bracket-pair-colorizer-2",
+		"shardulm94.trailing-spaces",
+		"fudge.auto-using",
+		"heaths.vscode-guid",
+		"patcx.vscode-nuget-gallery",
+		"ckolkman.vscode-postgres"
+	],
     // Use 'forwardPorts' to make a list of ports inside the container available locally.
     "forwardPorts": [
         5000,
