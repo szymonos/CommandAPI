@@ -13,16 +13,13 @@
             "INSTALL_AZURE_CLI": "false"
         }
     },
-
     // Set *default* container specific settings.json values on container create.
     "settings": {
         "terminal.integrated.shell.linux": "/usr/bin/pwsh",
-        "workbench.colorTheme": "dark-plus-syntax",
+        "workbench.colorTheme": "One Dark Pro",
     },
-
     // Add the IDs of extensions you want installed when the container is created.
     "extensions": [
-        "ms-azuretools.vscode-azurefunctions",
         "ms-dotnettools.csharp",
         "ms-vscode.powershell",
         "hbenl.vscode-test-explorer",
@@ -33,12 +30,13 @@
         "shardulm94.trailing-spaces",
         "fudge.auto-using",
         "heaths.vscode-guid",
-        "ilich8086.untabify"
+        "patcx.vscode-nuget-gallery"
     ],
-
     // Use 'forwardPorts' to make a list of ports inside the container available locally.
-    "forwardPorts": [5000, 5001],
-
+    "forwardPorts": [
+        5000,
+        5001
+    ],
     // [Optional] To reuse of your local HTTPS dev cert, first export it locally using this command:
     //  * Windows PowerShell:
     //     dotnet dev-certs https --trust; dotnet dev-certs https -ep "$env:USERPROFILE/.aspnet/https/aspnetapp.pfx" -p "SecurePwdGoesHere"
@@ -55,10 +53,8 @@
         // "ASPNETCORE_Kestrel__Certificates__Default__Password": "SecurePwdGoesHere",
         // "ASPNETCORE_Kestrel__Certificates__Default__Path": "/home/vscode/.aspnet/https/aspnetapp.pfx",
     }
-
     // Use 'postCreateCommand' to run commands after the container is created.
     // "postCreateCommand": "dotnet restore",
-
     // Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
     // "remoteUser": "vscode"
 }

@@ -3,11 +3,8 @@
 PowerShell profile light.
 .EXAMPLE
 code -r $Profile.CurrentUserAllHosts
-Install-Module PSReadLine -AllowPrerelease -Force
-Set-PSReadLineOption -PredictionSource History
 #>
 $OutputEncoding = [Console]::InputEncoding = [Console]::OutputEncoding = New-Object System.Text.UTF8Encoding
-Set-PSReadLineOption -PredictionSource History
 function Prompt {
     filter repl { $_ -replace ('{0}' -f $env:HOME), '~' }
     if ((Get-History).Count -gt 0) {
@@ -17,7 +14,7 @@ function Prompt {
     }
     $promptPath = $PWD | repl
     [Console]::Write(
-        "`e[92m`u{250C}`u{2500} `e[93m[`e[38;5;147m{0:N1}ms`e[93m] `e[1m`e[34m$promptPath",
+        "`e[92m`u{250C}`u{2500} `e[0m[`e[1m`e[38;2;99;143;79m{0:N0} ms`e[0m] `e[1m`e[34m$promptPath",
         $executionTime
     )
     if ($branch = git rev-parse --abbrev-ref HEAD 2>$null) {

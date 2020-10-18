@@ -16,7 +16,7 @@ RUN if [ "${INSTALL_NODE}" = "true" ]; then su vscode -c "source /usr/local/shar
 
 # [Option] Install Azure CLI
 ARG INSTALL_AZURE_CLI="false"
-COPY scripts/azcli-debian.sh /tmp/scripts/
+COPY library-scripts/azcli-debian.sh /tmp/scripts/
 RUN if [ "$INSTALL_AZURE_CLI" = "true" ]; then bash /tmp/scripts/azcli-debian.sh; fi \
     && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/scripts
 
@@ -31,18 +31,13 @@ RUN apt update && apt-get install -y software-properties-common \
     # apt-get update && curl -ssL https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/common-debian.sh -o /tmp/common-script.sh \
     # && /bin/bash /tmp/common-script.sh "$INSTALL_ZSH" "$USERNAME" "$USER_UID" "$USER_GID" \
     # && rm /tmp/common-script.sh
-# apt install software-properties-common
-# add-apt-repository ppa:git-core/ppa
-# apt update; apt install git
 
 # Install PowerShell modules
-SHELL ["/usr/bin/pwsh", "-c"]
-RUN $ErrorActionPreference='Stop'; \
-    Install-Module PSReadLine -Force -AllowPrerelease;
+# SHELL ["/usr/bin/pwsh", "-c"]
+# RUN $ErrorActionPreference='Stop'; \
+#     Install-Module PSReadLine -Force -AllowPrerelease;
 
-COPY scripts/profile.ps1 /root/.config/powershell/
-COPY scripts/codespaces.theme.sh /root/.oh-my-bash/custom/themes/codespaces/
-COPY scripts/.bashrc /root/
+COPY library-scripts/profile.ps1 /root/.config/powershell/
 
 # Switch back to dialog for any ad-hoc use of apt-get
 ENV DEBIAN_FRONTEND=dialog
