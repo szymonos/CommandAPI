@@ -1,0 +1,6 @@
+{
+    "workbench.colorTheme": "Visual Studio 2019 Dark",
+    "terminal.integrated.env.windows": {
+        "APPCF_ENDPOINT": "https://ac-appcfg-mpn.azconfig.io"
+    }
+}

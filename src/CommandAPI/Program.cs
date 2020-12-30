@@ -1,3 +1,4 @@
+using Azure.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,9 +21,18 @@ namespace CommandAPI
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+                    webBuilder.ConfigureAppConfiguration((hostingContext, config) =>
+                    {
+                        var settings = config.Build();
+                        var appcfEndpoint = System.Environment.GetEnvironmentVariable("APPCF_ENDPOINT");
+                        var credential = new DefaultAzureCredential();
+                        config.AddAzureAppConfiguration(options =>
+                        {
+                            options.Connect(new Uri(appcfEndpoint), credential)
+                                .Select("Settings:*", hostingContext.HostingEnvironment.EnvironmentName);
+                        });
+                    })
+                .UseStartup<Startup>());
     }
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 }
