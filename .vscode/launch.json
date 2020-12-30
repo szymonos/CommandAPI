@@ -9,12 +9,10 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/src/CommandAPI/bin/Debug/netcoreapp3.1/CommandAPI.dll",
+            "program": "${workspaceFolder}/src/CommandAPI/bin/Debug/net5.0/CommandAPI.dll",
             "args": [],
             "cwd": "${workspaceFolder}/src/CommandAPI",
             "stopAtEntry": false,
-            // Enable launching a web browser when ASP.NET Core starts. For more information: https://aka.ms/VSCode-CS-LaunchJson-WebBrowser
             "serverReadyAction": {
                 "action": "openExternally",
                 "pattern": "\\bNow listening on:\\s+(https?://\\S+)",
@@ -28,10 +26,47 @@
             }
         },
         {
+            "name": ".NET Core Launch",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/src/CommandAPI/bin/Debug/net5.0/CommandAPI.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/src/CommandAPI",
+            "stopAtEntry": false,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            }
+        },
+        {
             "name": ".NET Core Attach",
             "type": "coreclr",
             "request": "attach",
             "processId": "${command:pickProcess}"
+        },
+        {
+            "name": "Docker .NET Core Launch",
+            "type": "docker",
+            "request": "launch",
+            "preLaunchTask": "docker-run: debug",
+            "netCore": {
+                "appProject": "${workspaceFolder}/src/CommandAPI/CommandAPI.csproj"
+            }
+        },
+        {
+            "name": "Docker .NET Core Attach (Preview)",
+            "type": "docker",
+            "request": "attach",
+            "platform": "netCore",
+            "netCore": {
+                "debuggerPath": "/remote_debugger/vsdbg"
+            },
+            "sourceFileMap": {
+                "/src": "${workspaceFolder}"
+            }
         }
     ]
 }

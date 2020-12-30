@@ -2,34 +2,24 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CommandAPI.Models
 {
-    ///<Summary>
-    /// Command
-    ///</Summary>
+    /// <summary>Command</summary>
     public class Command
     {
-        ///<Summary>
-        /// Id
-        ///</Summary>
+        /// <summary>Id</summary>
         [Key]
         [Required]
         public int Id { get; set; }
 
-        ///<Summary>
-        /// HowTo
-        ///</Summary>
+        /// <summary>HowTo</summary>
         [Required]
         [MaxLength(250)]
         public string HowTo { get; set; }
 
-        ///<Summary>
-        /// Platform
-        ///</Summary>
+        /// <summary>Platform</summary>
         [Required]
         public string Platform { get; set; }
 
-        ///<Summary>
-        /// CommandLine
-        ///</Summary>
+        /// <summary>CommandLine</summary>
         [Required]
         public string CommandLine { get; set; }
     }
