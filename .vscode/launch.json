@@ -19,7 +19,9 @@
                 "uriFormat": "%s/swagger/index.html"
             },
             "env": {
-                "ASPNETCORE_ENVIRONMENT": "Development"
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "APPCF_ENDPOINT": "https://ac-appcfg-mpn.azconfig.io",
+                "AZURE_CLIENT_ID": ""
             },
             "sourceFileMap": {
                 "/Views": "${workspaceFolder}/Views"
@@ -35,7 +37,9 @@
             "cwd": "${workspaceFolder}/src/CommandAPI",
             "stopAtEntry": false,
             "env": {
-                "ASPNETCORE_ENVIRONMENT": "Development"
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "APPCF_ENDPOINT": "https://ac-appcfg-mpn.azconfig.io",
+                "AZURE_CLIENT_ID": ""
             },
             "sourceFileMap": {
                 "/Views": "${workspaceFolder}/Views"

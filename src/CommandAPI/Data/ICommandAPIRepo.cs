@@ -1,37 +1,26 @@
 using System.Collections.Generic;
+
 using CommandAPI.Models;
 
-namespace CommandAPI.Data
-{
-    ///<Summary>
-    /// ICommandApiRepo
-    ///</Summary>
-    public interface ICommandApiRepo
-    {
-        ///<Summary>
-        /// SaveChanges
-        ///</Summary>
+namespace CommandAPI.Data {
+    /// <summary>ICommandApiRepo</summary>
+    public interface ICommandApiRepo {
+        /// <summary>SaveChanges</summary>
         bool SaveChanges();
 
-        ///<Summary>
-        /// GetAllCommands
-        ///</Summary>
+        /// <summary>GetAllCommands</summary>
         IEnumerable<Command> GetAllCommands();
-        ///<Summary>
-        /// GetCommandById
-        ///</Summary>
+
+        /// <summary>GetCommandById</summary>
         Command GetCommandById(int id);
-        ///<Summary>
-        /// CreateCommand
-        ///</Summary>
+
+        /// <summary>CreateCommand</summary>
         void CreateCommand(Command cmd);
-        ///<Summary>
-        /// UpdateCommand
-        ///</Summary>
+
+        /// <summary>UpdateCommand</summary>
         void UpdateCommand(Command cmd);
-        ///<Summary>
-        /// DeleteCommand
-        ///</Summary>
+
+        /// <summary>DeleteCommand</summary>
         void DeleteCommand(Command cmd);
     }
 }

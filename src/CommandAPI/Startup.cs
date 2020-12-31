@@ -1,18 +1,20 @@
+using System;
+using System.IO;
+using System.Reflection;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.IO;
-using System.Reflection;
 
+using CommandAPI.Configuration;
+using CommandAPI.Data;
 
 namespace CommandAPI {
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     public class Startup {
-        public Startup(IConfiguration configuration)
-        {
+        public Startup(IConfiguration configuration) {
             Configuration = configuration;
         }
 
@@ -20,8 +22,10 @@ namespace CommandAPI {
 
         public void ConfigureServices(IServiceCollection services) {
             //SECTION 1. Add code below
+            services.Configure<CmdApiSettings>(Configuration.GetSection("Settings"));
+            services.AddAzureAppConfiguration();
             services.AddControllers();
-            var tst = Configuration["Settings:TstSet"];
+            services.AddScoped<ICommandApiRepo, MockCommandApiRepo>();
 
             //swagger
             services.AddSwaggerGenNewtonsoftSupport();
@@ -40,6 +44,7 @@ namespace CommandAPI {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", Assembly.GetExecutingAssembly().GetName().Name);
             });
 
+            app.UseAzureAppConfiguration();
             app.UseRouting();
             app.UseEndpoints(endpoints => {
                 //SECTION 2. Add code below

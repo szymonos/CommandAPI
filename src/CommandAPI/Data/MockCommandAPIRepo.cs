@@ -1,33 +1,25 @@
-﻿using System.Data;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+
 using CommandAPI.Models;
 
 namespace CommandAPI.Data
 {
-    ///<Summary>
-    /// MockCommandApiRepo
-    ///</Summary>
+    /// <summary>MockCommandApiRepo</summary>
     public class MockCommandApiRepo : ICommandApiRepo
     {
-        ///<Summary>
-        /// CreateCommand
-        ///</Summary>
+        /// <summary>CreateCommand</summary>
         public void CreateCommand(Command cmd)
         {
             throw new System.NotImplementedException();
         }
 
-        ///<Summary>
-        /// DeleteCommand
-        ///</Summary>
+        /// <summary>DeleteCommand</summary>
         public void DeleteCommand(Command cmd)
         {
             throw new System.NotImplementedException();
         }
 
-        ///<Summary>
-        /// GetAllCommands
-        ///</Summary>
+        /// <summary>GetAllCommands</summary>
         public IEnumerable<Command> GetAllCommands()
         {
             var commands = new List<Command>
@@ -56,9 +48,7 @@ namespace CommandAPI.Data
             };
             return commands;
         }
-        ///<Summary>
-        /// GetCommandById
-        ///</Summary>
+        /// <summary>GetCommandById</summary>
         public Command GetCommandById(int id)
         {
             return new Command
@@ -70,17 +60,13 @@ namespace CommandAPI.Data
             };
         }
 
-        ///<Summary>
-        /// SaveChanges
-        ///</Summary>
+        /// <summary>SaveChanges</summary>
         public bool SaveChanges()
         {
             throw new System.NotImplementedException();
         }
 
-        ///<Summary>
-        /// UpdateCommand
-        ///</Summary>
+        /// <summary>UpdateCommand</summary>
         public void UpdateCommand(Command cmd)
         {
             throw new System.NotImplementedException();
