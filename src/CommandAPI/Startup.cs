@@ -9,8 +9,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+using AutoMapper;
+
 using CommandAPI.Configuration;
 using CommandAPI.Data;
+
+using Npgsql;
 
 namespace CommandAPI {
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
@@ -26,19 +30,20 @@ namespace CommandAPI {
             services.Configure<CmdApiSettings>(Configuration.GetSection("Settings"));
             services.AddAzureAppConfiguration();
 
-            services.AddDbContext<CommandContext>(options => {
-                options.UseNpgsql(Configuration.GetConnectionString("CmdDbPgsql"));
-            });
+            var builder = new NpgsqlConnectionStringBuilder {
+                ConnectionString = Configuration.GetConnectionString("CmdDbPgsql"),
+                Username = Configuration["Settings:DB:UserID"],
+                Password = Configuration["Settings:DB:Password"]
+            };
+            services.AddDbContext<CommandContext>
+                (options => options.UseNpgsql(builder.ConnectionString));
 
             services.AddControllers();
 
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
             services.AddScoped<ICommandApiRepo, SqlCommandApiRepo>();
 
-/*
-            services.AddDbContext<CommandContext>(options => {
-                options.UseSqlServer(Configuration.GetConnectionString("CmdDbPgsql"));
-            });
-*/
             //swagger
             services.AddSwaggerGenNewtonsoftSupport();
             services.AddSwaggerGen(options => {

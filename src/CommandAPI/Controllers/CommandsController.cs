@@ -7,8 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
+using AutoMapper;
+
 using CommandAPI.Configuration;
 using CommandAPI.Data;
+using CommandAPI.Dtos;
 using CommandAPI.Models;
 
 namespace CommandAPI.Controllers {
@@ -18,15 +21,18 @@ namespace CommandAPI.Controllers {
     public class CommandsController : ControllerBase {
 
         private readonly ICommandApiRepo _repository;
+        private readonly IMapper _mapper;
         private readonly ILogger<CommandsController> _logger;
         private readonly CmdApiSettings _settings;
 
         public CommandsController(
             ICommandApiRepo repository,
+            IMapper mapper,
             ILogger<CommandsController> logger,
             IOptionsSnapshot<CmdApiSettings> settings
         ) {
             _repository = repository;
+            _mapper = mapper;
             _logger = logger;
             _settings = settings.Value;
         }
@@ -36,10 +42,10 @@ namespace CommandAPI.Controllers {
         /// </summary>
         /// <returns>application/json</returns>
         [HttpGet]
-        public ActionResult<IEnumerable<Command>> GetAllCommands() {
+        public ActionResult<IEnumerable<CommandReadDto>> GetAllCommands() {
             var commandItems = _repository.GetAllCommands();
 
-            return Ok(commandItems);
+            return Ok(_mapper.Map<IEnumerable<CommandReadDto>>(commandItems));
         }
 
         /// <summary>
@@ -48,12 +54,12 @@ namespace CommandAPI.Controllers {
         /// <param name="id">Id of the command</param>
         /// <returns>application/json</returns>
         [HttpGet("{id}")]
-        public ActionResult<Command> GetCommandById(int id) {
+        public ActionResult<CommandReadDto> GetCommandById(int id) {
             var commandItem = _repository.GetCommandById(id);
             if (commandItem == null) {
                 return NotFound();
             }
-            return Ok(commandItem);
+            return Ok(_mapper.Map<CommandReadDto>(commandItem));
         }
         /*
                 public ActionResult<IEnumerable<string>> Get() {

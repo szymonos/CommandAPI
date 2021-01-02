@@ -23,6 +23,7 @@ namespace CommandAPI {
                         config.AddAzureAppConfiguration(options => {
                             options.Connect(new Uri(appcfEndpoint), credential)
                                 .Select("ConnectionStrings:CmdDbPgsql", hostingContext.HostingEnvironment.EnvironmentName)
+                                .Select("Settings:DB:*", hostingContext.HostingEnvironment.EnvironmentName)
                                 .ConfigureRefresh(refresh =>
                                     refresh.Register("Settings:Sentinel", refreshAll: true)
                                         .SetCacheExpiration(new TimeSpan(0, 0, 30))
