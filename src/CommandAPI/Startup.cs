@@ -32,7 +32,7 @@ namespace CommandAPI {
 
             services.AddControllers();
 
-            services.AddScoped<ICommandApiRepo, MockCommandApiRepo>();
+            services.AddScoped<ICommandApiRepo, SqlCommandApiRepo>();
 
 /*
             services.AddDbContext<CommandContext>(options => {
