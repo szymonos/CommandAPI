@@ -22,11 +22,12 @@ namespace CommandAPI {
                         var credential = new DefaultAzureCredential();
                         config.AddAzureAppConfiguration(options => {
                             options.Connect(new Uri(appcfEndpoint), credential)
-                                .Select("Settings:*", hostingContext.HostingEnvironment.EnvironmentName)
+                                .Select("ConnectionStrings:CmdDbPgsql", hostingContext.HostingEnvironment.EnvironmentName)
                                 .ConfigureRefresh(refresh =>
                                     refresh.Register("Settings:Sentinel", refreshAll: true)
-                                            .SetCacheExpiration(new TimeSpan(0, 0, 30))
+                                        .SetCacheExpiration(new TimeSpan(0, 0, 30))
                                 );
+                            options.ConfigureKeyVault(kv => kv.SetCredential(credential));
                         });
                     })
                 .UseStartup<Startup>());

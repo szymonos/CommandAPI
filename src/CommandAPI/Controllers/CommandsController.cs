@@ -18,18 +18,17 @@ namespace CommandAPI.Controllers {
     public class CommandsController : ControllerBase {
 
         private readonly ICommandApiRepo _repository;
-        private readonly CmdApiSettings _settings;
         private readonly ILogger<CommandsController> _logger;
+        private readonly CmdApiSettings _settings;
 
-        /// <summary>CommandsController constructor</summary>
         public CommandsController(
             ICommandApiRepo repository,
             ILogger<CommandsController> logger,
             IOptionsSnapshot<CmdApiSettings> settings
         ) {
+            _repository = repository;
             _logger = logger;
             _settings = settings.Value;
-            _repository = repository;
         }
 
         /// <summary>

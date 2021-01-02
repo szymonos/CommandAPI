@@ -4,6 +4,7 @@ using System.Reflection;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -24,9 +25,20 @@ namespace CommandAPI {
             //SECTION 1. Add code below
             services.Configure<CmdApiSettings>(Configuration.GetSection("Settings"));
             services.AddAzureAppConfiguration();
+
+            services.AddDbContext<CommandContext>(options => {
+                options.UseNpgsql(Configuration.GetConnectionString("CmdDbPgsql"));
+            });
+
             services.AddControllers();
+
             services.AddScoped<ICommandApiRepo, MockCommandApiRepo>();
 
+/*
+            services.AddDbContext<CommandContext>(options => {
+                options.UseSqlServer(Configuration.GetConnectionString("CmdDbPgsql"));
+            });
+*/
             //swagger
             services.AddSwaggerGenNewtonsoftSupport();
             services.AddSwaggerGen(options => {

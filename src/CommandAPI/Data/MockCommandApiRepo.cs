@@ -4,22 +4,18 @@ using CommandAPI.Models;
 
 namespace CommandAPI.Data
 {
-    /// <summary>MockCommandApiRepo</summary>
     public class MockCommandApiRepo : ICommandApiRepo
     {
-        /// <summary>CreateCommand</summary>
         public void CreateCommand(Command cmd)
         {
             throw new System.NotImplementedException();
         }
 
-        /// <summary>DeleteCommand</summary>
         public void DeleteCommand(Command cmd)
         {
             throw new System.NotImplementedException();
         }
 
-        /// <summary>GetAllCommands</summary>
         public IEnumerable<Command> GetAllCommands()
         {
             var commands = new List<Command>
@@ -48,7 +44,6 @@ namespace CommandAPI.Data
             };
             return commands;
         }
-        /// <summary>GetCommandById</summary>
         public Command GetCommandById(int id)
         {
             return new Command
@@ -60,13 +55,11 @@ namespace CommandAPI.Data
             };
         }
 
-        /// <summary>SaveChanges</summary>
         public bool SaveChanges()
         {
             throw new System.NotImplementedException();
         }
 
-        /// <summary>UpdateCommand</summary>
         public void UpdateCommand(Command cmd)
         {
             throw new System.NotImplementedException();
