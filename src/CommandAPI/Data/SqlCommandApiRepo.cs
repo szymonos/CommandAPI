@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -12,33 +13,34 @@ namespace CommandAPI.Data {
 
         private readonly CommandContext _context;
 
-        public SqlCommandApiRepo(CommandContext context) {
+        public SqlCommandApiRepo(CommandContext context) =>
             _context = context;
-        }
 
         public void CreateCommand(Command cmd) {
-            throw new System.NotImplementedException();
+            if (cmd == null) {
+                throw new ArgumentNullException(nameof(cmd));
+            }
+            _context.CommandItems.Add(cmd);
         }
 
         public void DeleteCommand(Command cmd) {
-            throw new System.NotImplementedException();
+            if (cmd == null) {
+                throw new ArgumentNullException(nameof(cmd));
+            }
+            _context.CommandItems.Remove(cmd);
         }
 
-        public IEnumerable<Command> GetAllCommands() {
-            return _context.CommandItems.ToList();
-        }
+        public IEnumerable<Command> GetAllCommands() =>
+            _context.CommandItems.ToList();
 
-        public Command GetCommandById(int id) {
-            return _context.CommandItems.FirstOrDefault(p =>
-                p.Id == id);
-        }
+        public Command GetCommandById(int id) =>
+            _context.CommandItems.FirstOrDefault(p => p.Id == id);
 
-        public bool SaveChanges() {
-            throw new System.NotImplementedException();
-        }
+        public bool SaveChanges() =>
+            _context.SaveChanges() >= 0;
 
         public void UpdateCommand(Command cmd) {
-            throw new System.NotImplementedException();
+            // No implementation required.
         }
     }
 }

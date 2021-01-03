@@ -1,8 +1,13 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace CommandAPI.Dtos {
-    public class CommandReadDto {
-        public int Id { get; set; }
+    public class CommandUpdateDto {
+        [Required]
+        [MaxLength(250)]
         public string HowTo { get; set; }
+        [Required]
         public string Platform { get; set; }
+        [Required]
         public string CommandLine { get; set; }
     }
 }

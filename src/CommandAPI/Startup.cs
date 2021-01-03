@@ -11,13 +11,13 @@ using Microsoft.Extensions.Hosting;
 
 using AutoMapper;
 
-using CommandAPI.Configuration;
 using CommandAPI.Data;
+
+using Newtonsoft.Json.Serialization;
 
 using Npgsql;
 
 namespace CommandAPI {
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     public class Startup {
         public Startup(IConfiguration configuration) {
             Configuration = configuration;
@@ -27,7 +27,6 @@ namespace CommandAPI {
 
         public void ConfigureServices(IServiceCollection services) {
             //SECTION 1. Add code below
-            services.Configure<CmdApiSettings>(Configuration.GetSection("Settings"));
             services.AddAzureAppConfiguration();
 
             var builder = new NpgsqlConnectionStringBuilder {
@@ -35,10 +34,13 @@ namespace CommandAPI {
                 Username = Configuration["Settings:DB:UserID"],
                 Password = Configuration["Settings:DB:Password"]
             };
-            services.AddDbContext<CommandContext>
-                (options => options.UseNpgsql(builder.ConnectionString));
+            services.AddDbContext<CommandContext>(options => {
+                options.UseNpgsql(builder.ConnectionString);
+            });
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(options => {
+                options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            });
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
@@ -69,5 +71,4 @@ namespace CommandAPI {
             });
         }
     }
-#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 }
