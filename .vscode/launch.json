@@ -26,7 +26,7 @@
             }
         },
         {
-            "name": ".NET Core Launch",
+            "name": ".NET Core (dev)",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
@@ -36,6 +36,22 @@
             "stopAtEntry": false,
             "env": {
                 "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            }
+        },
+        {
+            "name": ".NET Core (prod)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/src/CommandAPI/bin/Debug/net5.0/CommandAPI.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/src/CommandAPI",
+            "stopAtEntry": false,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Production"
             },
             "sourceFileMap": {
                 "/Views": "${workspaceFolder}/Views"

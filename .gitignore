@@ -3,6 +3,12 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+# fakesharper inspection
+inspectcode.xml
+
+# EF Migration files
+Migrations/
+
 # User-specific files
 *.rsuser
 *.suo
@@ -58,6 +64,7 @@ BenchmarkDotNet.Artifacts/
 project.lock.json
 project.fragment.lock.json
 artifacts/
+**/Properties/launchSettings.json
 
 # StyleCop
 StyleCopReport.xml

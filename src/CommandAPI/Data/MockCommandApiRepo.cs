@@ -1,33 +1,21 @@
-﻿using System.Data;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+
 using CommandAPI.Models;
 
 namespace CommandAPI.Data
 {
-    ///<Summary>
-    /// MockCommandApiRepo
-    ///</Summary>
     public class MockCommandApiRepo : ICommandApiRepo
     {
-        ///<Summary>
-        /// CreateCommand
-        ///</Summary>
         public void CreateCommand(Command cmd)
         {
             throw new System.NotImplementedException();
         }
 
-        ///<Summary>
-        /// DeleteCommand
-        ///</Summary>
         public void DeleteCommand(Command cmd)
         {
             throw new System.NotImplementedException();
         }
 
-        ///<Summary>
-        /// GetAllCommands
-        ///</Summary>
         public IEnumerable<Command> GetAllCommands()
         {
             var commands = new List<Command>
@@ -56,9 +44,6 @@ namespace CommandAPI.Data
             };
             return commands;
         }
-        ///<Summary>
-        /// GetCommandById
-        ///</Summary>
         public Command GetCommandById(int id)
         {
             return new Command
@@ -70,17 +55,11 @@ namespace CommandAPI.Data
             };
         }
 
-        ///<Summary>
-        /// SaveChanges
-        ///</Summary>
         public bool SaveChanges()
         {
             throw new System.NotImplementedException();
         }
 
-        ///<Summary>
-        /// UpdateCommand
-        ///</Summary>
         public void UpdateCommand(Command cmd)
         {
             throw new System.NotImplementedException();

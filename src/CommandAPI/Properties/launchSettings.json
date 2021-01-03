@@ -1,38 +1,58 @@
 {
-  "iisSettings": {
-    "windowsAuthentication": false,
-    "anonymousAuthentication": true,
-    "iisExpress": {
-      "applicationUrl": "http://localhost:29053",
-      "sslPort": 44354
-    }
-  },
-  "$schema": "http://json.schemastore.org/launchsettings.json",
-  "profiles": {
-    "IIS Express": {
-      "commandName": "IISExpress",
-      "launchBrowser": true,
-      "launchUrl": "api/commands",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "APPCF_ENDPOINT": "https://ac-appcfg-mpn.azconfig.io"
-      }
+    "iisSettings": {
+        "windowsAuthentication": false,
+        "anonymousAuthentication": true,
+        "iisExpress": {
+            "applicationUrl": "http://localhost:5000",
+            "sslPort": 5001
+        }
     },
-    "CommandAPI": {
-      "commandName": "Project",
-      "launchBrowser": true,
-      "launchUrl": "api/commands",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "applicationUrl": "https://localhost:5001;http://localhost:5000"
-    },
-    "Docker": {
-      "commandName": "Docker",
-      "launchBrowser": true,
-      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/api/commands",
-      "publishAllPorts": true,
-      "useSSL": true
+    "$schema": "http://json.schemastore.org/launchsettings.json",
+    "profiles": {
+        "IIS Express": {
+            "commandName": "IISExpress",
+            "launchBrowser": true,
+            "launchUrl": "api/commands",
+            "environmentVariables": {
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "APPCF_ENDPOINT": "https://ac-appcfg-mpn.azconfig.io",
+                "AZURE_CLIENT_ID": ""
+            }
+        },
+        "Run (dev)": {
+            "commandName": "IISExpress",
+            "launchBrowser": false,
+            "environmentVariables": {
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "APPCF_ENDPOINT": "https://ac-appcfg-mpn.azconfig.io",
+                "AZURE_CLIENT_ID": ""
+            }
+        },
+        "Run (prod)": {
+            "commandName": "IISExpress",
+            "launchBrowser": false,
+            "environmentVariables": {
+                "ASPNETCORE_ENVIRONMENT": "Production",
+                "APPCF_ENDPOINT": "https://ac-appcfg-mpn.azconfig.io",
+                "AZURE_CLIENT_ID": ""
+            }
+        },
+        "CommandAPI": {
+            "commandName": "Project",
+            "launchBrowser": true,
+            "launchUrl": "api/commands",
+            "environmentVariables": {
+                "APPCF_ENDPOINT": "https://ac-appcfg-mpn.azconfig.io",
+                "AZURE_CLIENT_ID": ""
+            },
+            "applicationUrl": "https://localhost:5001;http://localhost:5000"
+        },
+        "Docker": {
+            "commandName": "Docker",
+            "launchBrowser": true,
+            "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/api/commands",
+            "publishAllPorts": true,
+            "useSSL": true
+        }
     }
-  }
 }

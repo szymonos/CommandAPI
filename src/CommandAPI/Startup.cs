@@ -1,18 +1,25 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using System;
 using System.IO;
 using System.Reflection;
 
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+
+using AutoMapper;
+
+using CommandAPI.Data;
+
+using Newtonsoft.Json.Serialization;
+
+using Npgsql;
 
 namespace CommandAPI {
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     public class Startup {
-        public Startup(IConfiguration configuration)
-        {
+        public Startup(IConfiguration configuration) {
             Configuration = configuration;
         }
 
@@ -20,8 +27,24 @@ namespace CommandAPI {
 
         public void ConfigureServices(IServiceCollection services) {
             //SECTION 1. Add code below
-            services.AddControllers();
-            var tst = Configuration["Settings:TstSet"];
+            services.AddAzureAppConfiguration();
+
+            var builder = new NpgsqlConnectionStringBuilder {
+                ConnectionString = Configuration.GetConnectionString("CmdDbPgsql"),
+                Username = Configuration["Settings:DB:UserID"],
+                Password = Configuration["Settings:DB:Password"]
+            };
+            services.AddDbContext<CommandContext>(options => {
+                options.UseNpgsql(builder.ConnectionString);
+            });
+
+            services.AddControllers().AddNewtonsoftJson(options => {
+                options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            });
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            services.AddScoped<ICommandApiRepo, SqlCommandApiRepo>();
 
             //swagger
             services.AddSwaggerGenNewtonsoftSupport();
@@ -40,6 +63,7 @@ namespace CommandAPI {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", Assembly.GetExecutingAssembly().GetName().Name);
             });
 
+            app.UseAzureAppConfiguration();
             app.UseRouting();
             app.UseEndpoints(endpoints => {
                 //SECTION 2. Add code below
@@ -47,5 +71,4 @@ namespace CommandAPI {
             });
         }
     }
-#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 }
