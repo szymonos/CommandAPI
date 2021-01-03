@@ -6,6 +6,9 @@ variables:
   value: '**/*.csproj'
 - name: BuildParameters.TestProjects
   value: '**/*[Tt]ests/*.csproj'
+- name: vmImageName
+  value: 'ubuntu-latest'
+
 name: $(date:yyMMdd)$(rev:.r)
 
 resources:
