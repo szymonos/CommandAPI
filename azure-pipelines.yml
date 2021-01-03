@@ -38,6 +38,7 @@ jobs:
       arguments: --configuration $(BuildConfiguration)
   - task: DotNetCoreCLI@2
     displayName: Publish
+    condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
     inputs:
       command: publish
       publishWebProjects: True
@@ -46,7 +47,7 @@ jobs:
       zipAfterPublish: True
   - task: PublishBuildArtifacts@1
     displayName: Publish Artifact
-    condition: succeededOrFailed()
+    condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
     inputs:
       PathtoPublish: $(build.artifactstagingdirectory)
       TargetPath: '\\my\share\$(Build.DefinitionName)\$(Build.BuildNumber)'
