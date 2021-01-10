@@ -11,6 +11,7 @@ using AutoMapper;
 using CommandAPI.Data;
 using CommandAPI.Dtos;
 using CommandAPI.Models;
+// using Microsoft.AspNetCore.Authorization;
 
 namespace CommandAPI.Controllers {
     /// <summary>CommandsController</summary>
@@ -41,6 +42,7 @@ namespace CommandAPI.Controllers {
         /// </summary>
         /// <param name="id">Command id.</param>
         /// <returns>Single command.</returns>
+        // [Authorize]
         [HttpGet("{id}", Name = "GetCommandById")]
         public ActionResult<CommandReadDto> GetCommandById(int id) {
             var commandItem = _repository.GetCommandById(id);
@@ -55,6 +57,7 @@ namespace CommandAPI.Controllers {
         /// </summary>
         /// <param name="commandCreateDto">JSON payload with command definition.</param>
         /// <returns>Created command with Id.</returns>
+        // [Authorize]
         [HttpPost]
         public ActionResult<CommandReadDto> CreateCommand(CommandCreateDto commandCreateDto) {
             var commandModel = _mapper.Map<Command>(commandCreateDto);
@@ -70,6 +73,7 @@ namespace CommandAPI.Controllers {
         /// <param name="id">Id of updated command.</param>
         /// <param name="commandUpdateDto">JSON payload with command definition.</param>
         /// <returns>NoContent</returns>
+        // [Authorize]
         [HttpPut("{id}")]
         public ActionResult UpdateCommand(int id, CommandUpdateDto commandUpdateDto) {
             var commandModelFromRepo = _repository.GetCommandById(id);
@@ -88,6 +92,7 @@ namespace CommandAPI.Controllers {
         /// <param name="id">Id of updated command.</param>
         /// <param name="patchDoc">Patch document.</param>
         /// <returns>NoContent</returns>
+        // [Authorize]
         [HttpPatch("{id}")]
         public ActionResult PartialCommandUpdate(int id, JsonPatchDocument<CommandUpdateDto> patchDoc) {
             var commandModelFromRepo = _repository.GetCommandById(id);
@@ -110,6 +115,7 @@ namespace CommandAPI.Controllers {
         /// </summary>
         /// <param name="id">Id od deleted command.</param>
         /// <returns>NoContent</returns>
+        // [Authorize]
         [HttpDelete("{id}")]
         public ActionResult DeleteCommand(int id) {
             var commandModelFromRepo = _repository.GetCommandById(id);

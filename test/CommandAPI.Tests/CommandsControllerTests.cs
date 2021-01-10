@@ -22,6 +22,7 @@ namespace CommandAPI.Tests {
         CommandsProfile realProfile;
         MapperConfiguration configuration;
         IMapper mapper;
+
         public CommandsControllerTests() {
             mockRepo = new Mock<ICommandApiRepo>();
             realProfile = new CommandsProfile();
@@ -29,6 +30,7 @@ namespace CommandAPI.Tests {
                 cfg.AddProfile(realProfile));
             mapper = new Mapper(configuration);
         }
+
         public void Dispose() {
             mockRepo = null;
             mapper = null;

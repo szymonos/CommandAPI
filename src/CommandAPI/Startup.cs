@@ -16,6 +16,7 @@ using CommandAPI.Data;
 using Newtonsoft.Json.Serialization;
 
 using Npgsql;
+// using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace CommandAPI {
     public class Startup {
@@ -37,6 +38,12 @@ namespace CommandAPI {
             services.AddDbContext<CommandContext>(options => {
                 options.UseNpgsql(builder.ConnectionString);
             });
+
+            // services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            //     .AddJwtBearer(opt => {
+            //         opt.Audience = Configuration["Secret:AAD:ResourceId"];
+            //         opt.Authority = $"{Configuration["Secret:AAD:Instance"]}{Configuration["Secret:AAD:TenantId"]}";
+            //     });
 
             services.AddControllers().AddNewtonsoftJson(options => {
                 options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
@@ -65,6 +72,10 @@ namespace CommandAPI {
 
             app.UseAzureAppConfiguration();
             app.UseRouting();
+
+            // app.UseAuthentication();
+            // app.UseAuthorization();
+
             app.UseEndpoints(endpoints => {
                 //SECTION 2. Add code below
                 endpoints.MapControllers();

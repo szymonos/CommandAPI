@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+  postgresql:
+    image: postgres
+    container_name: pgsql
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=${DB_PWD}
